@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara Smith</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:          #FAF8FC;
+            --white:       #FFFFFF;
+            --dark:        #1A1A1A;
+            --mid:         #4B5563;
+            --light:       #9CA3AF;
+            --coral:       #C2527C;
+            --coral-light: #F8E0EC;
+            --teal:        #7B5EA7;
+            --teal-light:  #EDE0F5;
+            --gold:        #C9963A;
+            --gold-light:  #FBF3E0;
+            --border:      #E8E4EF;
+            --radius:      14px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(250, 248, 252, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--mid);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--coral); }
+
+        /* ===== SHARED ===== */
+        section { padding: 100px 0; }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            line-height: 1.15;
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 62px;
+        }
+
+        .hero-content { max-width: 680px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--teal-light);
+            color: var(--teal);
+            border-radius: 100px;
+            padding: 0.35rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 1.75rem;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--teal);
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .hero-name {
+            font-size: clamp(3.2rem, 9vw, 5.8rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 0.95;
+            color: var(--dark);
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-name span { color: var(--coral); }
+
+        .hero-title {
+            font-size: 1.1rem;
+            color: var(--mid);
+            font-weight: 400;
+            margin-bottom: 1.75rem;
+            line-height: 1.55;
+            max-width: 540px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.28rem 0.85rem;
+            font-size: 0.78rem;
+            color: var(--mid);
+            font-weight: 500;
+        }
+
+        .tag.gold {
+            background: var(--gold-light);
+            border-color: #E9C876;
+            color: #8B6520;
+        }
+
+        .tag.teal {
+            background: var(--teal-light);
+            border-color: #C0A0DC;
+            color: var(--teal);
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.75rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--coral);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .btn-ghost:hover { color: var(--coral); }
+
+        .lang-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            font-size: 0.82rem;
+            color: var(--mid);
+        }
+
+        .lang-sep { color: var(--border); margin: 0 0.15rem; }
+
+        /* ===== EXPERIENCE ===== */
+        #experience { background: var(--white); }
+
+        .timeline { position: relative; padding-left: 0; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--coral) 0%, var(--teal) 100%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding-left: 2.25rem;
+            padding-bottom: 2.75rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            top: 7px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--coral);
+            border: 2.5px solid var(--white);
+            box-shadow: 0 0 0 2px var(--coral);
+        }
+
+        .timeline-dot.teal {
+            background: var(--teal);
+            box-shadow: 0 0 0 2px var(--teal);
+        }
+
+        .timeline-meta {
+            font-size: 0.74rem;
+            color: var(--light);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-company {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--coral);
+            margin-bottom: 0.1rem;
+        }
+
+        .timeline-company.teal { color: var(--teal); }
+
+        .timeline-role {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.02em;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.38rem;
+        }
+
+        .timeline-bullets li {
+            font-size: 0.875rem;
+            color: var(--mid);
+            padding-left: 1.1rem;
+            position: relative;
+            line-height: 1.55;
+        }
+
+        .timeline-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-size: 0.75rem;
+            top: 0.12rem;
+        }
+
+        .edu-block {
+            margin-top: 3rem;
+            padding: 1.5rem 1.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .edu-icon { font-size: 2rem; }
+
+        .edu-school {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.01em;
+        }
+
+        .edu-detail {
+            font-size: 0.82rem;
+            color: var(--mid);
+            margin-top: 0.15rem;
+        }
+
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 3rem;
+        }
+
+        .skills-label {
+            width: 100%;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--light);
+            margin-top: 1.5rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .keychain-note {
+            color: rgba(255,255,255,0.38);
+            font-size: 0.74rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .chip {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.28rem 0.9rem;
+            font-size: 0.78rem;
+            color: var(--mid);
+            font-weight: 500;
+        }
+
+        .chip.coral {
+            background: var(--coral-light);
+            border-color: #DFA0BF;
+            color: #8B2252;
+        }
+
+        .chip.teal {
+            background: var(--teal-light);
+            border-color: #C0A0DC;
+            color: var(--teal);
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-photo-wrap { position: relative; }
+
+        .about-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.13);
+            display: block;
+        }
+
+        .about-photo-fallback {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--teal-light), var(--coral-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+        }
+
+        .about-bio p {
+            color: var(--mid);
+            font-size: 0.95rem;
+            line-height: 1.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .lang-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--teal-light);
+            border: 1px solid #C0A0DC;
+            color: #5B3D8A;
+            border-radius: var(--radius);
+            padding: 0.6rem 1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .interests {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .interest-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+        }
+
+        .interest-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .interest-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .interest-desc {
+            font-size: 0.74rem;
+            color: var(--light);
+            line-height: 1.45;
+        }
+
+/* ===== KEYCHAIN CTA ===== */
+        #keychain {
+            padding: 0 0 80px 0;
+        }
+
+        .keychain-card {
+            background: linear-gradient(135deg, var(--dark) 0%, #2C2C3E 100%);
+            border-radius: var(--radius);
+            padding: 3.5rem 3rem;
+            text-align: center;
+        }
+
+        .keychain-card h2 {
+            color: white;
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+        }
+
+        .keychain-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.92rem;
+            margin-bottom: 2rem;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.65;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.75rem 1.75rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: inline-block;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .btn-white:hover {
+            background: var(--coral);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: var(--light);
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 760px) {
+            nav { padding: 0 1.25rem; }
+            .nav-links { display: none; }
+            .container { padding: 0 1.25rem; }
+            section { padding: 70px 0; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-photo, .about-photo-fallback { aspect-ratio: 1 / 1; width: 200px; margin: 0 auto; }
+            .interests { grid-template-columns: 1fr; }
+            .keychain-card { padding: 2.5rem 1.5rem; }
+            #travel-map { height: 340px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#hero" class="nav-logo">Sara Smith</a>
+    <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="mailto:smith.sara0727@gmail.com">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="container">
+        <div class="hero-content">
+<h1 class="hero-name">Sara<br><span>Smith.</span></h1>
+            <p class="hero-title">
+                Technical Project Manager &amp; AI Workflow Designer, helping teams work smarter through technology, data, and clear thinking.
+            </p>
+            <div class="hero-tags">
+                <span class="tag">Los Angeles, CA</span>
+                <span class="tag gold">AI Agent Design</span>
+                <span class="tag">Data &amp; Media Insights</span>
+                <span class="tag">Survey Programming</span>
+                <span class="tag teal">Bilingual EN / ES</span>
+            </div>
+            <div class="hero-cta">
+                <a href="mailto:smith.sara0727@gmail.com" class="btn-primary">Get in touch</a>
+                <a href="#experience" class="btn-ghost">See my work &rarr;</a>
+            </div>
+            <div class="lang-row">
+                <span>&#127482;&#127480; English</span>
+                <span class="lang-sep">&middot;</span>
+                <span>&#127474;&#127485; Espa&ntilde;ol</span>
+                <span style="color: var(--light); font-size: 0.76rem; margin-left: 0.2rem;">Fully bilingual</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KEYCHAIN CTA -->
+<section id="keychain">
+    <div class="container">
+        <div class="keychain-card">
+            <h2>Loved the keychain? Get your own.</h2>
+            <p>
+                Custom NFC keychains that tap directly to your website or portfolio. Perfect for conferences, networking events, and making a lasting first impression.
+            </p>
+            <a href="https://sakery-shop.myshopify.com" class="btn-white" target="_blank" rel="noopener noreferrer">
+                Order yours &rarr;
+            </a>
+            <p class="keychain-note">Not an ad, just someone with a very diverse skill set.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="container">
+        <p class="section-label">Career</p>
+        <h2 class="section-title">Experience</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-meta">March 2025 to Present</div>
+                <div class="timeline-company">4Media Group</div>
+                <div class="timeline-role">Technical Project Manager</div>
+                <ul class="timeline-bullets">
+                    <li>Drove internal AI adoption by creating usage guidelines, workflows, and examples that helped teams integrate AI into daily operations with confidence.</li>
+                    <li>Designed and built AI-assisted workflows and internal tools to streamline survey setup, reporting, and documentation.</li>
+                    <li>Built and deployed custom internal AI agents with defined rules, guardrails, and workflows for consistent, scalable outputs across teams.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot teal"></div>
+                <div class="timeline-meta">October 2022 to March 2025</div>
+                <div class="timeline-company teal">4Media Group</div>
+                <div class="timeline-role">Insights Analyst</div>
+                <ul class="timeline-bullets">
+                    <li>Built and maintained dynamic Excel workbooks that automated calculations, strengthened data integrity, and enabled real-time reporting.</li>
+                    <li>Led comprehensive media and survey landscape analyses, identifying gaps, trends, and whitespace opportunities that shaped client strategy.</li>
+                    <li>Designed insight maps to visualize customer locations and audience concentration for targeted PR outreach.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-meta">August 2021 to October 2022</div>
+                <div class="timeline-company">NBCUniversal</div>
+                <div class="timeline-role">Digital Inventory Analyst, NBC Ad Sales</div>
+                <ul class="timeline-bullets">
+                    <li>Collaborated with National Sales Planners on inventory avails and final sign-off on media plans.</li>
+                    <li>Forecasted and allocated Video and Display advertising inventory for The Fandango Network.</li>
+                    <li>Reviewed and approved insertion orders, communicating discrepancies effectively with the Planning team.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot teal"></div>
+                <div class="timeline-meta">March 2015 to August 2021</div>
+                <div class="timeline-company teal">NBCUniversal</div>
+                <div class="timeline-role">Client Analyst, NBC News</div>
+                <ul class="timeline-bullets">
+                    <li>Queried, validated, and transformed large datasets into concise executive reports for strategic analytics initiatives.</li>
+                    <li>Tracked audience data for major events: Super Bowl, Olympics (2016, 2018, 2020), Emmy Awards, SNL, The Voice, and AGT.</li>
+                    <li>Monitored major news events including the 2016 &amp; 2020 Presidential Elections and the Covid-19 Pandemic.</li>
+                    <li>Spearheaded NBCUniversal News Group's first Well/Life Balance employee wellness event.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-meta">October 2014 to March 2015</div>
+                <div class="timeline-company">Norsan Media</div>
+                <div class="timeline-role">Digital Content Specialist Trainee</div>
+                <ul class="timeline-bullets">
+                    <li>Reduced website bounce rate from 87% to 27% through strategic content scheduling using Google Analytics insights.</li>
+                    <li>Trained employees on WordPress content management.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Education -->
+        <div class="edu-block">
+            <span class="edu-icon">&#127891;</span>
+            <div>
+                <div class="edu-school">University of North Carolina Charlotte</div>
+                <div class="edu-detail">B.S. Marketing, Concentration in Marketing Analytics &middot; Minor: MIS &middot; GPA 3.74 &middot; Magna Cum Laude &middot; May 2015</div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-wrap">
+            <span class="skills-label">Technical Skills</span>
+            <span class="chip coral">AI Agent Design</span>
+            <span class="chip coral">Workflow Automation</span>
+            <span class="chip coral">Project Management</span>
+            <span class="chip teal">Bilingual EN / ES</span>
+            <span class="chip">Survey Design &amp; Programming</span>
+            <span class="chip">Data Visualization</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Python / Pandas</span>
+            <span class="chip">Advanced Excel</span>
+            <span class="chip">Research &amp; Analysis</span>
+            <span class="chip">Forsta</span>
+            <span class="chip">Qualtrics</span>
+            <span class="chip">Cint</span>
+            <span class="chip">Meltwater</span>
+            <span class="chip">IQ Media</span>
+            <span class="chip">Google Analytics</span>
+            <span class="chip">Adobe Analytics</span>
+            <span class="chip">Salesforce</span>
+            <span class="chip">ESRI / Business Analyst</span>
+            <span class="chip">SharePoint</span>
+            <span class="skills-label">Soft Skills</span>
+            <span class="chip coral">Creative Problem-Solving</span>
+            <span class="chip coral">Initiative</span>
+            <span class="chip coral">Stakeholder Management</span>
+            <span class="chip">Cross-team Collaboration</span>
+            <span class="chip">Strategic Communication</span>
+            <span class="chip">Critical Thinking</span>
+            <span class="chip">Process Improvement</span>
+            <span class="chip">Adaptability</span>
+            <span class="chip">Curiosity</span>
+            <span class="chip">Self-motivated</span>
+            <span class="chip">Positive Leadership</span>
+            <span class="chip">Optimism</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <p class="section-label">Beyond the resume</p>
+        <h2 class="section-title">A little about me</h2>
+
+        <div class="about-grid">
+            <div class="about-photo-wrap">
+                <img
+                    src="Shelter.jpg"
+                    alt="Sara volunteering at Burbank Animal Shelter"
+                    class="about-photo"
+                    onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex';"
+                >
+                <div id="photo-fallback" class="about-photo-fallback" style="display:none;">&#128062;</div>
+            </div>
+
+            <div class="about-bio">
+                <div class="lang-highlight">
+                    &#127482;&#127480; English &nbsp;&middot;&nbsp; &#127474;&#127485; Espa&ntilde;ol &nbsp;&middot;&nbsp; Fully bilingual, professionally and personally.
+                </div>
+
+                <p>
+                    I'm a creative problem-solver who finds energy at the intersection of technology, people, and data. I love building things that actually work — whether that's an AI workflow that saves a team hours every week, or an insight map that helps a client see their market clearly for the first time.
+                </p>
+                <p>
+                    Outside of work, I spend time on trails, at the Burbank Animal Shelter cheering on pups waiting for their forever homes, and planning the next trip. Life outside the office keeps me grounded, and it makes me better at my job.
+                </p>
+                <p>
+                    Being bilingual isn't just a skill on a resume. It shapes how I communicate, how I connect, and how I see the world.
+                </p>
+
+                <div class="interests">
+                    <div class="interest-card">
+                        <span class="interest-icon">&#129406;</span>
+                        <div class="interest-title">Hiking</div>
+                        <div class="interest-desc">SoCal trails, fresh air, mountain views</div>
+                    </div>
+                    <div class="interest-card">
+                        <span class="interest-icon">&#128062;</span>
+                        <div class="interest-title">Dog Volunteering</div>
+                        <div class="interest-desc">Burbank Animal Shelter — helping pups find homes</div>
+                    </div>
+                    <div class="interest-card">
+                        <span class="interest-icon">&#9992;&#65039;</span>
+                        <div class="interest-title">Traveling</div>
+                        <div class="interest-desc">Mexico, South Korea, across the US &amp; beyond</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        Sara Smith &nbsp;&middot;&nbsp; Los Angeles, CA &nbsp;&middot;&nbsp;
+        <a href="mailto:smith.sara0727@gmail.com">smith.sara0727@gmail.com</a>
+    </p>
+    <p style="margin-top: 0.4rem;">&#127482;&#127480; English &nbsp;&middot;&nbsp; &#127474;&#127485; Espa&ntilde;ol &nbsp;&middot;&nbsp; &copy; 2025</p>
+</footer>
+
+
+</body>
+</html>
