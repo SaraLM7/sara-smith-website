@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Keychains — Sara Smith</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:          #FAF8FC;
+            --white:       #FFFFFF;
+            --dark:        #1A1A1A;
+            --mid:         #4B5563;
+            --light:       #9CA3AF;
+            --coral:       #C2527C;
+            --coral-light: #F8E0EC;
+            --teal:        #7B5EA7;
+            --teal-light:  #EDE0F5;
+            --gold:        #C9963A;
+            --gold-light:  #FBF3E0;
+            --border:      #E8E4EF;
+            --radius:      14px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(250, 248, 252, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--mid);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--coral); }
+
+        /* ===== SHARED ===== */
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.15;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--mid);
+            margin-bottom: 2.5rem;
+            max-width: 560px;
+            line-height: 1.65;
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, var(--dark) 0%, #2C2C3E 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #hero .section-label { color: var(--coral-light); opacity: 0.85; }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span { color: var(--coral); }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.65);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .price-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .price-badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .price-badge strong { color: var(--coral); }
+
+        .hero-scroll {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== STEPS ===== */
+        .steps-wrap {
+            padding: 80px 0 0;
+        }
+
+        .step {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step:last-child { border-bottom: none; }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--dark);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-number.active { background: var(--coral); }
+
+        /* ===== PHOTO GRID ===== */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .photo-option {
+            position: relative;
+            cursor: pointer;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            aspect-ratio: 1 / 1;
+            background: var(--border);
+        }
+
+        .photo-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+        }
+
+        .photo-option.selected {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 1px var(--coral), 0 16px 36px rgba(194,82,124,0.2);
+        }
+
+        .photo-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 1.25rem 0.85rem 0.65rem;
+            pointer-events: none;
+        }
+
+        .photo-check {
+            position: absolute;
+            top: 0.6rem; right: 0.6rem;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--coral);
+            color: white;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+        }
+
+        .photo-option.selected .photo-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Custom upload card */
+        .upload-card {
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius);
+            border: 2px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .upload-card:hover {
+            border-color: var(--teal);
+            background: var(--teal-light);
+            transform: translateY(-3px);
+        }
+
+        .upload-card.selected {
+            border-color: var(--coral);
+            border-style: solid;
+            border-width: 3px;
+            box-shadow: 0 0 0 1px var(--coral), 0 16px 36px rgba(194,82,124,0.2);
+        }
+
+        .upload-card input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 2.2rem;
+            pointer-events: none;
+        }
+
+        .upload-text {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--teal);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .upload-hint {
+            font-size: 0.7rem;
+            color: var(--light);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .upload-preview {
+            position: absolute;
+            inset: 0;
+            display: none;
+        }
+
+        .upload-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-card.has-preview .upload-preview { display: block; }
+        .upload-card.has-preview .upload-icon,
+        .upload-card.has-preview .upload-text,
+        .upload-card.has-preview .upload-hint { display: none; }
+
+        .upload-card .photo-check { z-index: 2; }
+
+        /* ===== URL FIELD ===== */
+        .field-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-width: 560px;
+        }
+
+        .field-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .field-hint {
+            font-size: 0.78rem;
+            color: var(--light);
+            line-height: 1.5;
+        }
+
+        .field-input {
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 0.8rem 1.1rem;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .field-input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(123,94,167,0.12);
+        }
+
+        .field-input::placeholder { color: var(--light); }
+
+        /* ===== ORDER SUMMARY ===== */
+        #step-order {
+            padding-bottom: 80px;
+        }
+
+        .summary-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            max-width: 560px;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-row:last-child { border-bottom: none; }
+
+        .summary-row .label { color: var(--mid); }
+
+        .summary-row .value {
+            font-weight: 600;
+            color: var(--dark);
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+
+        .summary-row.total .label { font-weight: 700; font-size: 1rem; color: var(--dark); }
+        .summary-row.total .value { font-size: 1.1rem; color: var(--coral); }
+
+        .order-note {
+            background: var(--gold-light);
+            border: 1px solid #E9C876;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            font-size: 0.82rem;
+            color: #7A5A1A;
+            line-height: 1.6;
+            max-width: 560px;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-note strong { font-weight: 600; }
+
+        .btn-order {
+            background: var(--coral);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.25rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-order:hover {
+            background: #A83F69;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(194,82,124,0.3);
+        }
+
+        .btn-order:disabled {
+            background: var(--light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .validation-msg {
+            font-size: 0.8rem;
+            color: var(--coral);
+            margin-top: 0.75rem;
+            display: none;
+        }
+
+        /* ===== CONFIRMATION MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: calc(var(--radius) * 1.5);
+            padding: 2.5rem 2rem;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(16px);
+            transition: transform 0.25s;
+        }
+
+        .modal-overlay.open .modal { transform: translateY(0); }
+
+        .modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+        .modal h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+        }
+
+        .modal p {
+            font-size: 0.875rem;
+            color: var(--mid);
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-steps {
+            text-align: left;
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 1.1rem 1.25rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .modal-step {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            font-size: 0.82rem;
+            color: var(--mid);
+            line-height: 1.5;
+        }
+
+        .modal-step-num {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--coral);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn-email {
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .btn-email:hover { background: var(--coral); }
+
+        .btn-shopify {
+            background: var(--teal-light);
+            color: var(--teal);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: block;
+            border: 1px solid #C0A0DC;
+            transition: background 0.2s;
+        }
+
+        .btn-shopify:hover { background: #DDD0F0; }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 0.25rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-close:hover { color: var(--mid); }
+
+        /* ===== FAQ ===== */
+        #faq {
+            padding: 60px 0 80px;
+            background: var(--white);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 680px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 1.1rem 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.15s;
+        }
+
+        .faq-q:hover { background: var(--bg); }
+
+        .faq-q .chevron {
+            font-size: 0.75rem;
+            color: var(--light);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-q { background: var(--bg); }
+        .faq-item.open .chevron { transform: rotate(180deg); }
+
+        .faq-a {
+            display: none;
+            padding: 0 1.25rem 1.1rem;
+            font-size: 0.875rem;
+            color: var(--mid);
+            line-height: 1.7;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-item.open .faq-a { display: block; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: var(--light);
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 760px) {
+            nav { padding: 0 1.25rem; }
+            .nav-links { display: none; }
+            .container { padding: 0 1.25rem; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .modal { padding: 2rem 1.25rem; }
+        }
+
+        @media (max-width: 480px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">Sara Smith</a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="mailto:smith.sara0727@gmail.com">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="container">
+        <p class="section-label">Custom Keychains</p>
+        <h1 class="hero-title">Tap. Connect. <span>Be remembered.</span></h1>
+        <p class="hero-desc">
+            Custom keychains with your photo — tap them at a conference and instantly share your portfolio, LinkedIn, or any link you want.
+        </p>
+        <div class="price-badges">
+            <span class="price-badge">Preset design — <strong>$15</strong></span>
+            <span class="price-badge">Custom photo — <strong>$18</strong></span>
+        </div>
+        <p class="hero-scroll">Scroll down to build yours &darr;</p>
+    </div>
+</section>
+
+<!-- STEPS -->
+<div class="steps-wrap">
+    <div class="container">
+    <form name="keychain-order" data-netlify="true" enctype="multipart/form-data" id="order-form" netlify>
+        <input type="hidden" name="form-name" value="keychain-order">
+        <input type="hidden" name="design" id="form-design">
+        <input type="hidden" name="price" id="form-price">
+
+        <!-- STEP 1: Choose design -->
+        <div class="step" id="step-design">
+            <div class="step-header">
+                <div class="step-number active">1</div>
+                <div>
+                    <p class="section-label">Step 1</p>
+                    <h2 class="section-title">Choose your design</h2>
+                    <p class="section-subtitle">
+                        Pick one of the preset photos below, or upload your own image ($18). Custom uploads must be JPG, PNG, or WebP (max 10 MB).
+                    </p>
+                </div>
+            </div>
+
+            <div class="photo-grid">
+
+                <div class="photo-option" data-design="Green Ocean" data-price="15.00" onclick="selectPreset(this)">
+                    <img src="cancun.jpg" alt="Green Ocean">
+                    <div class="photo-label">Green Ocean</div>
+                    <div class="photo-check">&#10003;</div>
+                </div>
+
+                <div class="photo-option" data-design="Sunset" data-price="15.00" onclick="selectPreset(this)">
+                    <img src="atardecer.jpg" alt="Sunset">
+                    <div class="photo-label">Sunset</div>
+                    <div class="photo-check">&#10003;</div>
+                </div>
+
+                <div class="photo-option" data-design="Clouds" data-price="15.00" onclick="selectPreset(this)">
+                    <img src="nubes.jpg" alt="Clouds">
+                    <div class="photo-label">Clouds</div>
+                    <div class="photo-check">&#10003;</div>
+                </div>
+
+                <div class="photo-option" data-design="Maui Sunset" data-price="15.00" onclick="selectPreset(this)">
+                    <img src="atardecer_maui.jpg" alt="Maui Sunset">
+                    <div class="photo-label">Maui Sunset</div>
+                    <div class="photo-check">&#10003;</div>
+                </div>
+
+                <div class="photo-option" data-design="City Lights" data-price="15.00" onclick="selectPreset(this)">
+                    <img src="ciudad.jpg" alt="City Lights">
+                    <div class="photo-label">City Lights</div>
+                    <div class="photo-check">&#10003;</div>
+                </div>
+
+                <!-- Custom upload -->
+                <div class="upload-card" id="upload-card" data-design="Custom Photo" data-price="18.00">
+                    <input type="file" id="custom-upload" name="photo" accept="image/jpeg,image/png,image/webp" onchange="handleUpload(this)">
+                    <div class="upload-icon">+</div>
+                    <div class="upload-text">Upload your photo</div>
+                    <div class="upload-hint">JPG, PNG, WebP &middot; max 10 MB</div>
+                    <div class="photo-check">&#10003;</div>
+                    <div class="upload-preview" id="upload-preview">
+                        <img id="preview-img" src="" alt="Your custom photo">
+                    </div>
+                </div>
+
+            </div>
+            <p id="upload-error" style="color:var(--coral); font-size:0.8rem; margin-top:0.75rem; display:none;"></p>
+        </div>
+
+        <!-- STEP 2: Website URL -->
+        <div class="step" id="step-url">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div>
+                    <p class="section-label">Step 2</p>
+                    <h2 class="section-title">Where should the keychain link?</h2>
+                    <p class="section-subtitle">
+                        Where do you want people to land when they tap your keychain? Your portfolio, LinkedIn, anything works.
+                    </p>
+                </div>
+            </div>
+
+            <div class="field-wrap">
+                <label class="field-label" for="nfc-url">Your website or link</label>
+                <input
+                    type="url"
+                    id="nfc-url"
+                    name="link"
+                    class="field-input"
+                    placeholder="https://yourname.com"
+                    oninput="updateSummary()"
+                >
+                <span class="field-hint">LinkedIn profile, personal site, portfolio, Linktree — anything works.</span>
+            </div>
+        </div>
+
+        <!-- STEP 3: Shipping address -->
+        <div class="step" id="step-shipping">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div>
+                    <p class="section-label">Step 3</p>
+                    <h2 class="section-title">Where should we ship it?</h2>
+                    <p class="section-subtitle">US shipping only at this time.</p>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:1rem; max-width:560px;">
+                <div class="field-wrap">
+                    <label class="field-label" for="ship-name">Full name</label>
+                    <input type="text" id="ship-name" name="shipping_name" class="field-input" placeholder="Jane Doe" oninput="updateSummary()">
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label" for="ship-address">Street address</label>
+                    <input type="text" id="ship-address" name="shipping_address" class="field-input" placeholder="123 Main St, Apt 4B" oninput="updateSummary()">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <div class="field-wrap">
+                        <label class="field-label" for="ship-city">City</label>
+                        <input type="text" id="ship-city" name="shipping_city" class="field-input" placeholder="Los Angeles" oninput="updateSummary()">
+                    </div>
+                    <div class="field-wrap">
+                        <label class="field-label" for="ship-state">State / Province</label>
+                        <input type="text" id="ship-state" name="shipping_state" class="field-input" placeholder="CA" oninput="updateSummary()">
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <div class="field-wrap">
+                        <label class="field-label" for="ship-zip">ZIP / Postal code</label>
+                        <input type="text" id="ship-zip" name="shipping_zip" class="field-input" placeholder="90001" oninput="updateSummary()">
+                    </div>
+                    <div class="field-wrap">
+                        <label class="field-label" for="ship-country">Country</label>
+                        <input type="text" id="ship-country" name="shipping_country" class="field-input" placeholder="United States" oninput="updateSummary()">
+                    </div>
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label" for="ship-email">Email <span style="font-weight:400; color:var(--light);">(for order confirmation)</span></label>
+                    <input type="email" id="ship-email" name="email" class="field-input" placeholder="you@email.com" oninput="updateSummary()">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Order -->
+        <div class="step" id="step-order">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div>
+                    <p class="section-label">Step 4</p>
+                    <h2 class="section-title">Review & order</h2>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span class="label">Design</span>
+                    <span class="value" id="summary-design">Not selected</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label">Link</span>
+                    <span class="value" id="summary-url">Not entered</span>
+                </div>
+                <div class="summary-row">
+                    <span class="label">Ship to</span>
+                    <span class="value" id="summary-address">Not entered</span>
+                </div>
+                <div class="summary-row total">
+                    <span class="label">Total</span>
+                    <span class="value" id="summary-price">—</span>
+                </div>
+            </div>
+
+            <div class="order-note">
+                <strong>Almost done!</strong> Review your order above, then hit "Pay now." You'll go straight to a secure checkout page — no account needed.
+            </div>
+
+            <button type="submit" class="btn-order" id="order-btn" disabled>
+                Pay now &rarr;
+            </button>
+            <p style="font-size:0.75rem; color:var(--light); margin-top:0.75rem;">You'll be taken to a secure Stripe checkout page to complete payment.</p>
+            <p class="validation-msg" id="validation-msg">Please complete all steps before ordering.</p>
+        </div>
+
+        <!-- Success state -->
+        <div id="success-state" style="display:none; padding: 60px 0; text-align:center;">
+            <div style="font-size:3rem; margin-bottom:1rem;">&#127881;</div>
+            <h2 style="font-size:1.5rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:0.6rem;">Order received!</h2>
+            <p style="color:var(--mid); font-size:0.95rem; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.7;">
+                Your order has been received! You'll get a payment link in your inbox shortly to complete your purchase.
+            </p>
+        </div>
+
+    </form>
+    </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+        <p class="section-label">Questions</p>
+        <h2 class="section-title">FAQ</h2>
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How does tapping work?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-a">
+                    Just hold your phone near the keychain — no app needed. Works with any modern iPhone or Android. Your link opens instantly.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Can I change the link later?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-a">
+                    Yes! Just reach out to Sara and she can update it for you at no cost. No need to buy a new keychain.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    What size / format should my custom photo be?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-a">
+                    JPG, PNG, or WebP — max 10 MB. For best print quality, use a photo that is at least 1000 x 1000 px and square or close to square. Landscape and portrait photos are cropped to fit the keychain face.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How long does shipping take?
+                    <span class="chevron">&#9660;</span>
+                </button>
+                <div class="faq-a">
+                    Orders typically ship within 5–7 business days after payment is confirmed. US only at this time.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        Sara Smith &nbsp;&middot;&nbsp; Los Angeles, CA &nbsp;&middot;&nbsp;
+        <a href="mailto:smith.sara0727@gmail.com">smith.sara0727@gmail.com</a>
+        &nbsp;&middot;&nbsp; <a href="index.html">Back to site</a>
+    </p>
+    <p style="margin-top: 0.4rem;">&copy; 2026</p>
+</footer>
+
+
+<script>
+    let selectedDesign = null;
+    let selectedPrice  = null;
+
+    // ===== Select preset photo =====
+    function selectPreset(el) {
+        document.querySelectorAll('.photo-option, .upload-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedDesign = el.dataset.design;
+        selectedPrice  = el.dataset.price;
+        document.getElementById('form-design').value = selectedDesign;
+        document.getElementById('form-price').value  = selectedPrice;
+        updateSummary();
+    }
+
+    // ===== Handle file upload =====
+    function handleUpload(input) {
+        const file = input.files[0];
+        const errorEl = document.getElementById('upload-error');
+
+        if (!file) return;
+
+        const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!allowed.includes(file.type)) {
+            errorEl.textContent = 'Please upload a JPG, PNG, or WebP image.';
+            errorEl.style.display = 'block';
+            input.value = '';
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            errorEl.textContent = 'Image is too large. Max size is 10 MB.';
+            errorEl.style.display = 'block';
+            input.value = '';
+            return;
+        }
+
+        errorEl.style.display = 'none';
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview-img').src = e.target.result;
+            const card = document.getElementById('upload-card');
+            card.classList.add('has-preview');
+
+            document.querySelectorAll('.photo-option, .upload-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedDesign = 'Custom Photo';
+            selectedPrice  = card.dataset.price;
+            document.getElementById('form-design').value = selectedDesign;
+            document.getElementById('form-price').value  = selectedPrice;
+
+            updateSummary();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // ===== Update summary =====
+    function updateSummary() {
+        const url     = document.getElementById('nfc-url').value.trim();
+        const name    = document.getElementById('ship-name').value.trim();
+        const address = document.getElementById('ship-address').value.trim();
+        const city    = document.getElementById('ship-city').value.trim();
+        const state   = document.getElementById('ship-state').value.trim();
+        const zip     = document.getElementById('ship-zip').value.trim();
+        const country = document.getElementById('ship-country').value.trim();
+        const email   = document.getElementById('ship-email').value.trim();
+
+        const addressLine = [name, address, city, state, zip, country].filter(Boolean).join(', ');
+
+        document.getElementById('summary-design').textContent  = selectedDesign || 'Not selected';
+        document.getElementById('summary-url').textContent     = url || 'Not entered';
+        document.getElementById('summary-address').textContent = addressLine || 'Not entered';
+        document.getElementById('summary-price').textContent   = selectedPrice ? '$' + selectedPrice : '—';
+
+        const shippingComplete = name && address && city && zip;
+        document.getElementById('order-btn').disabled = !(selectedDesign && url && shippingComplete && email);
+    }
+
+    // ===== Stripe payment links — replace with your real URLs from stripe.com =====
+    const STRIPE_LINKS = {
+        '15.00': 'https://buy.stripe.com/REPLACE_WITH_PRESET_LINK',
+        '18.00': 'https://buy.stripe.com/REPLACE_WITH_CUSTOM_LINK',
+    };
+
+    // ===== Form submit: save to Netlify then redirect to Stripe =====
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const url = document.getElementById('nfc-url').value.trim();
+        if (!selectedDesign || !url) {
+            document.getElementById('validation-msg').style.display = 'block';
+            return;
+        }
+
+        document.getElementById('validation-msg').style.display = 'none';
+        const btn = document.getElementById('order-btn');
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+
+        fetch('/', {
+            method: 'POST',
+            body: new FormData(this),
+        })
+        .then(function() {
+            // Order saved — redirect to Stripe for payment
+            const stripeUrl = STRIPE_LINKS[selectedPrice];
+            window.location.href = stripeUrl;
+        })
+        .catch(function() {
+            btn.disabled = false;
+            btn.textContent = 'Pay now →';
+            document.getElementById('validation-msg').textContent = 'Something went wrong. Please try again.';
+            document.getElementById('validation-msg').style.display = 'block';
+        });
+    });
+
+    // ===== FAQ accordion =====
+    function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    }
+</script>
+
+</body>
+</html>
