@@ -561,6 +561,241 @@
 
         footer a:hover { text-decoration: underline; }
 
+        /* ===== CHAT WIDGET ===== */
+        #chat-widget {
+            position: fixed;
+            bottom: 1.75rem;
+            right: 1.75rem;
+            z-index: 200;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        #chat-toggle {
+            background: var(--coral);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 0.65rem 1.2rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            box-shadow: 0 6px 24px rgba(194, 82, 124, 0.38);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        #chat-toggle:hover {
+            background: #a8405f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(194, 82, 124, 0.45);
+        }
+
+        #chat-toggle .chat-icon { font-size: 1rem; }
+
+        #chat-panel {
+            position: absolute;
+            bottom: calc(100% + 0.75rem);
+            right: 0;
+            width: 340px;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.16), 0 0 0 1px var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: chatSlideUp 0.22s ease;
+            max-height: 520px;
+        }
+
+        @keyframes chatSlideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2C2C3E 100%);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info { display: flex; align-items: center; gap: 0.6rem; }
+
+        .chat-header-avatar {
+            width: 30px;
+            height: 30px;
+            background: var(--coral);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .chat-header-text { line-height: 1.3; }
+
+        .chat-header-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .chat-header-sub {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        #chat-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.15rem 0.3rem;
+            border-radius: 6px;
+            transition: color 0.15s, background 0.15s;
+            line-height: 1;
+        }
+
+        #chat-close:hover { color: white; background: rgba(255,255,255,0.1); }
+
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 310px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-bubble {
+            max-width: 84%;
+            padding: 0.65rem 0.9rem;
+            border-radius: 14px;
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+
+        .chat-bubble.bot {
+            background: var(--bg);
+            color: var(--dark);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-bubble.user {
+            background: var(--coral);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble.loading {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+        }
+
+        .chat-dots {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 2px 0;
+        }
+
+        .chat-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--light);
+            border-radius: 50%;
+            animation: chatDot 1.2s ease-in-out infinite;
+        }
+
+        .chat-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes chatDot {
+            0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding: 0 1.1rem 0.9rem;
+        }
+
+        .chat-suggestion {
+            background: var(--teal-light);
+            border: 1px solid #C0A0DC;
+            color: var(--teal);
+            border-radius: 100px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.73rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .chat-suggestion:hover {
+            background: #DDD0F0;
+            transform: translateY(-1px);
+        }
+
+        .chat-input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--white);
+        }
+
+        #chat-input {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 0.5rem 0.9rem;
+            font-size: 0.82rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--bg);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #chat-input:focus { border-color: var(--coral); }
+        #chat-input::placeholder { color: var(--light); }
+
+        #chat-send {
+            background: var(--coral);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        #chat-send:hover { background: #a8405f; transform: scale(1.05); }
+        #chat-send:disabled { background: var(--light); cursor: not-allowed; transform: none; }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 760px) {
             nav { padding: 0 1.25rem; }
@@ -572,6 +807,8 @@
             .interests { grid-template-columns: 1fr; }
             .keychain-card { padding: 2.5rem 1.5rem; }
             #travel-map { height: 340px; }
+            #chat-panel { width: calc(100vw - 2rem); right: 0; }
+            #chat-widget { bottom: 1.25rem; right: 1rem; }
         }
     </style>
 </head>
@@ -807,6 +1044,153 @@
     </div>
 </section>
 
+
+<!-- CHAT WIDGET -->
+<div id="chat-widget">
+    <button id="chat-toggle" aria-label="Ask Sara's AI assistant">
+        <span class="chat-icon">✦</span> Ask AI
+    </button>
+
+    <div id="chat-panel" hidden>
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-header-avatar">✦</div>
+                <div class="chat-header-text">
+                    <div class="chat-header-name">Sara's Career Assistant</div>
+                    <div class="chat-header-sub">Powered by Claude AI</div>
+                </div>
+            </div>
+            <button id="chat-close" aria-label="Close chat">✕</button>
+        </div>
+
+        <div id="chat-messages">
+            <div class="chat-bubble bot">
+                Hi! I'm Sara's professional assistant. Ask me anything about her career, experience, or skills.
+            </div>
+        </div>
+
+        <div class="chat-suggestions">
+            <button class="chat-suggestion">How long at NBCUniversal?</button>
+            <button class="chat-suggestion">Current role?</button>
+            <button class="chat-suggestion">AI experience?</button>
+            <button class="chat-suggestion">Top skills?</button>
+        </div>
+
+        <div class="chat-input-row">
+            <input
+                type="text"
+                id="chat-input"
+                placeholder="Ask about Sara's career…"
+                maxlength="400"
+                autocomplete="off"
+            />
+            <button id="chat-send" aria-label="Send">&#10148;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    const toggle   = document.getElementById('chat-toggle');
+    const panel    = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('chat-close');
+    const messages = document.getElementById('chat-messages');
+    const input    = document.getElementById('chat-input');
+    const sendBtn  = document.getElementById('chat-send');
+    const suggestions = document.querySelectorAll('.chat-suggestion');
+
+    let history = [];
+    let isLoading = false;
+
+    // Open / close
+    toggle.addEventListener('click', () => {
+        const isOpen = !panel.hidden;
+        panel.hidden = isOpen;
+        if (!isOpen) input.focus();
+    });
+
+    closeBtn.addEventListener('click', () => { panel.hidden = true; });
+
+    // Suggestion chips
+    suggestions.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (isLoading) return;
+            sendMessage(btn.textContent);
+        });
+    });
+
+    // Send on Enter
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !isLoading) sendMessage(input.value);
+    });
+
+    sendBtn.addEventListener('click', () => {
+        if (!isLoading) sendMessage(input.value);
+    });
+
+    function addBubble(text, role) {
+        const div = document.createElement('div');
+        div.className = 'chat-bubble ' + role;
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        return div;
+    }
+
+    function addLoading() {
+        const div = document.createElement('div');
+        div.className = 'chat-bubble loading';
+        div.innerHTML = '<div class="chat-dots"><span></span><span></span><span></span></div>';
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        return div;
+    }
+
+    async function sendMessage(text) {
+        text = (text || '').trim();
+        if (!text || isLoading) return;
+
+        // Hide suggestion chips after first use
+        const suggestionsEl = document.querySelector('.chat-suggestions');
+        if (suggestionsEl) suggestionsEl.style.display = 'none';
+
+        input.value = '';
+        isLoading = true;
+        sendBtn.disabled = true;
+
+        addBubble(text, 'user');
+        const loader = addLoading();
+
+        try {
+            const res = await fetch('/.netlify/functions/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text, history }),
+            });
+
+            const data = await res.json();
+            loader.remove();
+
+            if (res.ok && data.response) {
+                addBubble(data.response, 'bot');
+                history.push({ role: 'user', content: text });
+                history.push({ role: 'assistant', content: data.response });
+                // Keep last 6 messages to control cost
+                if (history.length > 6) history = history.slice(-6);
+            } else {
+                addBubble("Sorry, something went wrong. Please try again.", 'bot');
+            }
+        } catch {
+            loader.remove();
+            addBubble("Couldn't connect. Please try again in a moment.", 'bot');
+        }
+
+        isLoading = false;
+        sendBtn.disabled = false;
+        input.focus();
+    }
+})();
+</script>
 
 <!-- FOOTER -->
 <footer>
