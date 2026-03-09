@@ -603,12 +603,13 @@
             background: var(--white);
             border-radius: 18px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.16), 0 0 0 1px var(--border);
-            display: flex;
+            display: none;
             flex-direction: column;
             overflow: hidden;
             animation: chatSlideUp 0.22s ease;
             max-height: 520px;
         }
+        #chat-panel.chat-open { display: flex; }
 
         @keyframes chatSlideUp {
             from { opacity: 0; transform: translateY(12px); }
@@ -1000,7 +1001,7 @@
             <div class="about-photo-wrap">
                 <img
                     src="Shelter.jpg"
-                    alt="Sara volunteering at Burbank Animal Shelter"
+                    alt="Sara volunteering at a local animal shelter"
                     class="about-photo"
                     onerror="this.style.display='none'; document.getElementById('photo-fallback').style.display='flex';"
                 >
@@ -1016,7 +1017,7 @@
                     I'm a creative problem-solver who finds energy at the intersection of technology, people, and data. I love building things that actually work — whether that's an AI workflow that saves a team hours every week, or an insight map that helps a client see their market clearly for the first time.
                 </p>
                 <p>
-                    Outside of work, I spend time on trails, at the Burbank Animal Shelter cheering on pups waiting for their forever homes, and planning the next trip. Life outside the office keeps me grounded, and it makes me better at my job.
+                    Outside of work, I spend time on trails, at a local animal shelter socializing dogs and helping them find their forever homes, and planning the next trip. Life outside the office keeps me grounded, and it makes me better at my job.
                 </p>
                 <p>
                     Being bilingual isn't just a skill on a resume. It shapes how I communicate, how I connect, and how I see the world.
@@ -1031,7 +1032,7 @@
                     <div class="interest-card">
                         <span class="interest-icon">&#128062;</span>
                         <div class="interest-title">Dog Volunteering</div>
-                        <div class="interest-desc">Burbank Animal Shelter — helping pups find homes</div>
+                        <div class="interest-desc">Local animal shelter — socializing dogs & helping them find homes</div>
                     </div>
                     <div class="interest-card">
                         <span class="interest-icon">&#9992;&#65039;</span>
@@ -1051,7 +1052,7 @@
         <span class="chat-icon">✦</span> Ask AI
     </button>
 
-    <div id="chat-panel" hidden>
+    <div id="chat-panel">
         <div class="chat-header">
             <div class="chat-header-info">
                 <div class="chat-header-avatar">✦</div>
@@ -1104,12 +1105,12 @@
 
     // Open / close
     toggle.addEventListener('click', () => {
-        const isOpen = !panel.hidden;
-        panel.hidden = isOpen;
+        const isOpen = panel.classList.contains('chat-open');
+        panel.classList.toggle('chat-open', !isOpen);
         if (!isOpen) input.focus();
     });
 
-    closeBtn.addEventListener('click', () => { panel.hidden = true; });
+    closeBtn.addEventListener('click', () => { panel.classList.remove('chat-open'); });
 
     // Suggestion chips
     suggestions.forEach(btn => {
