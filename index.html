@@ -353,6 +353,43 @@
             margin-top: 0.15rem;
         }
 
+        .core-skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+            margin-top: 3rem;
+        }
+
+        .core-skill-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+        }
+
+        .core-skill-icon {
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .core-skill-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 0.2rem;
+        }
+
+        .core-skill-detail {
+            font-size: 0.73rem;
+            color: var(--mid);
+            line-height: 1.45;
+        }
+
+        @media (max-width: 640px) {
+            .core-skills { grid-template-columns: repeat(2, 1fr); }
+        }
+
         .skills-wrap {
             display: flex;
             flex-wrap: wrap;
@@ -855,6 +892,7 @@
     </div>
 </section>
 
+<!-- KEYCHAIN SECTION — hidden until launch, uncomment to re-enable
 <section id="keychain">
     <div class="container">
         <div class="keychain-card">
@@ -869,6 +907,7 @@
         </div>
     </div>
 </section>
+-->
 
 <!-- EXPERIENCE -->
 <section id="experience">
@@ -884,8 +923,9 @@
                 <div class="timeline-company">4Media Group</div>
                 <div class="timeline-role">Technical Project Manager</div>
                 <ul class="timeline-bullets">
+                    <li>Led end-to-end delivery of AI and automation initiatives across multiple teams, managing scope, timelines, cross-functional dependencies, and stakeholder communication.</li>
                     <li>Drove internal AI adoption by creating usage guidelines, workflows, and examples that helped teams integrate AI into daily operations with confidence.</li>
-                    <li>Designed and built AI-assisted workflows and internal tools to streamline survey setup, reporting, and documentation.</li>
+                    <li>Designed and built AI-assisted workflows and internal tools to streamline survey setup, reporting, and documentation — reducing manual effort and improving team efficiency.</li>
                     <li>Built and deployed custom internal AI agents with defined rules, guardrails, and workflows for consistent, scalable outputs across teams.</li>
                 </ul>
             </div>
@@ -920,10 +960,10 @@
                 <div class="timeline-company teal">NBCUniversal</div>
                 <div class="timeline-role">Client Analyst, NBC News</div>
                 <ul class="timeline-bullets">
-                    <li>Queried, validated, and transformed large datasets into concise executive reports for strategic analytics initiatives.</li>
-                    <li>Tracked audience data for major events: Super Bowl, Olympics (2016, 2018, 2020), Emmy Awards, SNL, The Voice, and AGT.</li>
-                    <li>Monitored major news events including the 2016 &amp; 2020 Presidential Elections and the Covid-19 Pandemic.</li>
-                    <li>Spearheaded NBCUniversal News Group's first Well/Life Balance employee wellness event.</li>
+                    <li>Queried, validated, and transformed large datasets into concise executive reports that informed strategic analytics decisions across the organization.</li>
+                    <li>Tracked and reported on audience data for high-stakes events including the Super Bowl, Olympics (2016, 2018, 2020), Emmy Awards, SNL, The Voice, and AGT.</li>
+                    <li>Managed relationships with third-party vendors and technical representatives to resolve data discrepancies and platform issues — keeping reporting pipelines running reliably.</li>
+                    <li>Monitored and analyzed major news events including the 2016 &amp; 2020 Presidential Elections and the Covid-19 Pandemic.</li>
                 </ul>
             </div>
 
@@ -949,13 +989,49 @@
             </div>
         </div>
 
+        <!-- Core Skills -->
+        <div class="core-skills">
+            <div class="core-skill-card">
+                <div class="core-skill-icon">📊</div>
+                <div class="core-skill-title">Survey Design &amp; Data Analysis</div>
+                <div class="core-skill-detail">End-to-end survey programming, landscape analysis, and translating data into actionable insights.</div>
+            </div>
+            <div class="core-skill-card">
+                <div class="core-skill-icon">📋</div>
+                <div class="core-skill-title">Advanced Excel</div>
+                <div class="core-skill-detail">Formulas, macros, pivot tables, dynamic dashboards, and automated reporting workbooks.</div>
+            </div>
+            <div class="core-skill-card">
+                <div class="core-skill-icon">📈</div>
+                <div class="core-skill-title">Data Visualization &amp; Reporting</div>
+                <div class="core-skill-detail">Power BI dashboards, executive-ready reports, and real-time performance tracking.</div>
+            </div>
+            <div class="core-skill-card">
+                <div class="core-skill-icon">📡</div>
+                <div class="core-skill-title">Media &amp; Market Research</div>
+                <div class="core-skill-detail">Audience analytics, media landscape analysis, and competitive whitespace identification.</div>
+            </div>
+            <div class="core-skill-card">
+                <div class="core-skill-icon">🤖</div>
+                <div class="core-skill-title">AI-Assisted Analysis &amp; Automation</div>
+                <div class="core-skill-detail">AI agent design, workflow automation, and building tools that reduce manual effort at scale.</div>
+            </div>
+            <div class="core-skill-card">
+                <div class="core-skill-icon">🤝</div>
+                <div class="core-skill-title">Cross-Functional Project Coordination</div>
+                <div class="core-skill-detail">Managing timelines, dependencies, and stakeholder communication across engineering, product, and business teams.</div>
+            </div>
+        </div>
+
         <!-- Skills -->
         <div class="skills-wrap">
             <span class="skills-label">Technical Skills</span>
             <span class="chip coral">AI Agent Design</span>
             <span class="chip coral">Workflow Automation</span>
-            <span class="chip coral">Project Management</span>
+            <span class="chip coral">Technical Project Management</span>
+            <span class="chip coral">Agile / Scrum</span>
             <span class="chip teal">Bilingual EN / ES</span>
+            <span class="chip">Jira</span>
             <span class="chip">Survey Design &amp; Programming</span>
             <span class="chip">Data Visualization</span>
             <span class="chip">Power BI</span>
@@ -977,8 +1053,11 @@
             <span class="chip coral">Creative Problem-Solving</span>
             <span class="chip coral">Initiative</span>
             <span class="chip coral">Stakeholder Management</span>
+            <span class="chip coral">Executive Communication</span>
+            <span class="chip">Vendor &amp; Partner Management</span>
             <span class="chip">Cross-team Collaboration</span>
             <span class="chip">Strategic Communication</span>
+            <span class="chip">Risk &amp; Dependency Management</span>
             <span class="chip">Critical Thinking</span>
             <span class="chip">Process Improvement</span>
             <span class="chip">Adaptability</span>

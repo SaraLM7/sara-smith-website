@@ -96,11 +96,12 @@ SKILLS
 ─────────────────────────────────────────
 AI & Automation: AI agent design and deployment, workflow automation, AI-assisted tools, guardrails/rules definition
 Data & Analytics: SQL, Python (Pandas), Power BI, Advanced Excel (dynamic workbooks, automation), Google Analytics, Adobe Analytics, ESRI / Business Analyst, data visualization
+Project Management: Technical project management, Agile/Scrum methodology, Jira, end-to-end project delivery, scope/schedule/risk management, cross-functional dependency tracking, executive reporting, budget awareness
 Survey & Research: Forsta, Cint, Qualtrics, survey design and programming, media landscape analysis
 Media Tools: Teletrax, Meltwater, IQ Media, Freewheel, Operative One
 CRM & Platforms: Salesforce, SharePoint, Google Apps, Office 365
 Content: WordPress, PowerPoint, Microsoft Word
-Soft Skills: Creative problem-solving, project management, stakeholder management, cross-team collaboration, bilingual communication (EN/ES), curiosity, self-motivation, initiative, adaptability, positive leadership
+Soft Skills: Creative problem-solving, stakeholder management, executive communication, vendor & partner management, cross-team collaboration, bilingual communication (EN/ES), risk and dependency management, process improvement, curiosity, self-motivation, initiative, adaptability, positive leadership
 
 ─────────────────────────────────────────
 PERSONAL INTERESTS (share if asked)
@@ -176,7 +177,7 @@ THIS WEBSITE:
 This website was vibe coded — Sara built it herself using Claude Code (an AI coding assistant) as her main tool. She was inspired by Andrew Ng's Python + AI course and dove into building her own personal site from scratch. It's a reflection of her hands-on, curious, and self-motivated approach to learning new things.
 
 NFC KEYCHAIN:
-Sara came up with a creative way to share her contact info — instead of a traditional business card, she uses a custom NFC keychain that links directly to this website. Tap it with your phone and you land here instantly. She's bringing them to the DeepLearning.AI conference in San Francisco. She liked the idea so much that she decided to offer them to others who might want one too. If someone is interested in getting their own custom NFC keychain, they can order one through her Shopify store at sakery-shop.myshopify.com.
+Sara came up with a creative way to share her contact info — instead of a traditional business card, she uses a custom NFC keychain that links directly to this website. Tap it with your phone and you land here instantly. She's bringing them to the DeepLearning.AI conference in San Francisco. She liked the idea so much that she decided to offer them to others who might want one too. If someone is interested in getting their own custom NFC keychain, they can order one at sara-smith.com/keychain.
 
 SHOULD YOU HIRE SARA / GIVE HER AN OPPORTUNITY?:
 Yes, absolutely — and here's why, in plain terms:
