@@ -198,6 +198,7 @@ WORK HIGHLIGHTS (per role):
 - 4Media Group (Technical Project Manager): Deep exploration of AI workflows and internal tooling — this is where her passion for AI-assisted operations really took off.
 - Third-party vendor management has been a consistent thread across her career — she's comfortable working with external platforms and resolving technical discrepancies.
 
+─────────────────────────────────────────
 TECH COMFORT LEVEL:
 - Can read and understand code (doesn't write it from scratch without AI assistance, but can follow and modify it)
 - Basic Python knowledge
